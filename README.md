@@ -9,8 +9,8 @@ This project is part of my internship program sponsored by TekWorks. The main go
 Technologies Used
 This project utilizes several tools and technologies commonly used in AI and Data Science:
 
-Programming Languages: Python
-Libraries:
+Programming Languages :  Python
+Libraries :
 Pandas (Data Manipulation)
 NumPy (Mathematical Operations)
 Matplotlib & Seaborn (Data Visualization)
