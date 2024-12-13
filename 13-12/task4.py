@@ -1,11 +1,11 @@
-#streamlit run task-4.py
 import streamlit as st
 
 class Bank:
     balance = 50000
 
     def deposit(self):
-        amount = st.number_input("Enter amount to deposit:", min_value=100, max_value=50000, step=100)
+        # Remove the default deposit amount
+        amount = st.number_input("Enter amount to deposit:", min_value=100, max_value=50000, step=100, value=None)
         if amount:
             if amount < 100 or amount > 50000:
                 st.title("Minimum deposit is 100 and Maximum deposit is 50000")
@@ -18,7 +18,8 @@ class Bank:
                 st.title("Amount should be in multiples of 100.")
 
     def withdraw(self):
-        amount = st.number_input("Enter amount to withdraw:", min_value=100)
+        # Remove the default withdrawal amount
+        amount = st.number_input("Enter amount to withdraw:", min_value=100, value=None)
         min_bal = 500
         minacc = self.balance - min_bal
         if amount:
@@ -59,7 +60,8 @@ class Bank:
     def validate(self):
         chance = 3
         while chance > 0:
-            pin = int(st.number_input("Enter your pin:", min_value=1000, max_value=9999))  # Convert input to int
+            # Remove default PIN value
+            pin = int(st.number_input("Enter your pin:"))
             actual_pin = 1234
             if pin == actual_pin:
                 self.viewoptions()
