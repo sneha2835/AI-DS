@@ -1,0 +1,167 @@
+create database 67b2_coe;
+usse 67b2_coe;
+
+create table student(sno int, sname varchar(20), marks int, city varchar(20), mobile int, gender varchar(20));
+
+insert into student values(1,'GUNJA SRIKANTH',90,'Hyderabad',90023223,'male');
+insert into student values(2,'DASARI SUPRIYA',34,'Hyderabad',90023223,'female');
+insert into student values(3,'VARKALA TEJASRI',50,'Pune',90023223,'female');
+insert into student values(4,'LAVOORI VARSHITHA',78,'bglr',90023223,'female');
+insert into student values(5,'EDUNURI BHAVIKA',10,'Pune',90023223,'female');
+insert into student values(6,'BEJAGAM CHETHAN TEJA',54,'Pune',90023223,'male');
+insert into student values(7,'C PRADEEP',95,'Hyderabad',90023223,'male');
+insert into student values(8,'RACHAPALLY NIKHITHA',87,'bglr',90023223,'female');
+insert into student values(9,'MANDLA NIKHITHA',82,'Hyderabad',90023223,'female');
+insert into student values(10,'BATTULA RAM GOPAL',90,'Hyderabad',90023223,'male');
+insert into student values(11,'BHUKYA SRIDHAR',77,'Pune',90023223,'male');
+insert into student values(12,'SHIVA KUMAR',75,'Pune',90023223,'male');
+insert into student values(13,'MOUNIKA',75,'Pune',90023223,'female');
+
+mysql> select * from student;
++------+----------------------+-------+-----------+----------+--------+
+| sno  | sname                | marks | city      | mobile   | gender |
++------+----------------------+-------+-----------+----------+--------+
+|    1 | GUNJA SRIKANTH       |    90 | Hyderabad | 90023223 | male   |
+|    2 | DASARI SUPRIYA       |    34 | Hyderabad | 90023223 | female |
+|    3 | VARKALA TEJASRI      |    50 | Pune      | 90023223 | female |
+|    4 | LAVOORI VARSHITHA    |    78 | bglr      | 90023223 | female |
+|    5 | EDUNURI BHAVIKA      |    10 | Pune      | 90023223 | female |
+|    6 | BEJAGAM CHETHAN TEJA |    54 | Pune      | 90023223 | male   |
+|    7 | C PRADEEP            |    95 | Hyderabad | 90023223 | male   |
+|    8 | RACHAPALLY NIKHITHA  |    87 | bglr      | 90023223 | female |
+|    9 | MANDLA NIKHITHA      |    82 | Hyderabad | 90023223 | female |
+|   10 | BATTULA RAM GOPAL    |    90 | Hyderabad | 90023223 | male   |
+|   11 | BHUKYA SRIDHAR       |    77 | Pune      | 90023223 | male   |
+|   12 | SHIVA KUMAR          |    75 | Pune      | 90023223 | male   |
+|   13 | MOUNIKA              |    75 | Pune      | 90023223 | female |
++------+----------------------+-------+-----------+----------+--------+
+
+
+1. Display student details whose city is Pune
+
+select * from student where city='Pune';
++------+----------------------+-------+------+----------+--------+
+| sno  | sname                | marks | city | mobile   | gender |
++------+----------------------+-------+------+----------+--------+
+|    3 | VARKALA TEJASRI      |    50 | Pune | 90023223 | female |
+|    5 | EDUNURI BHAVIKA      |    10 | Pune | 90023223 | female |
+|    6 | BEJAGAM CHETHAN TEJA |    54 | Pune | 90023223 | male   |
+|   11 | BHUKYA SRIDHAR       |    77 | Pune | 90023223 | male   |
+|   12 | SHIVA KUMAR          |    75 | Pune | 90023223 | male   |
+|   13 | MOUNIKA              |    75 | Pune | 90023223 | female |
++------+----------------------+-------+------+----------+--------+
+
+2. Display student details whose city is Hyderabad or Pune
+
+Select * from student where city='Hyderabad' or city='Pune';
++------+----------------------+-------+-----------+----------+--------+
+| sno  | sname                | marks | city      | mobile   | gender |
++------+----------------------+-------+-----------+----------+--------+
+|    1 | GUNJA SRIKANTH       |    90 | Hyderabad | 90023223 | male   |
+|    2 | DASARI SUPRIYA       |    34 | Hyderabad | 90023223 | female |
+|    3 | VARKALA TEJASRI      |    50 | Pune      | 90023223 | female |
+|    5 | EDUNURI BHAVIKA      |    10 | Pune      | 90023223 | female |
+|    6 | BEJAGAM CHETHAN TEJA |    54 | Pune      | 90023223 | male   |
+|    7 | C PRADEEP            |    95 | Hyderabad | 90023223 | male   |
+|    9 | MANDLA NIKHITHA      |    82 | Hyderabad | 90023223 | female |
+|   10 | BATTULA RAM GOPAL    |    90 | Hyderabad | 90023223 | male   |
+|   11 | BHUKYA SRIDHAR       |    77 | Pune      | 90023223 | male   |
+|   12 | SHIVA KUMAR          |    75 | Pune      | 90023223 | male   |
+|   13 | MOUNIKA              |    75 | Pune      | 90023223 | female |
++------+----------------------+-------+-----------+----------+--------+
+11 rows in set (0.00 sec)
+
+3. Display female students from Hyderabad and male students from Pune and all the students from bglr
+
+select * from student where gender = 'female' and city ='Hyderabad' or gender='male' and city='Pune' or city='bglr';
++------+----------------------+-------+-----------+----------+--------+
+| sno  | sname                | marks | city      | mobile   | gender |
++------+----------------------+-------+-----------+----------+--------+
+|    2 | DASARI SUPRIYA       |    34 | Hyderabad | 90023223 | female |
+|    4 | LAVOORI VARSHITHA    |    78 | bglr      | 90023223 | female |
+|    6 | BEJAGAM CHETHAN TEJA |    54 | Pune      | 90023223 | male   |
+|    8 | RACHAPALLY NIKHITHA  |    87 | bglr      | 90023223 | female |
+|    9 | MANDLA NIKHITHA      |    82 | Hyderabad | 90023223 | female |
+|   11 | BHUKYA SRIDHAR       |    77 | Pune      | 90023223 | male   |
+|   12 | SHIVA KUMAR          |    75 | Pune      | 90023223 | male   |
++------+----------------------+-------+-----------+----------+--------+
+7 rows in set (0.00 sec)
+
+4. Display students details 
+ ---> from Hyderabad city, male students who scored more than 70 and female who score more than 50.
+ ---> from Pune only male students
+
+select * from student where city='Hyderabad' and gender='male' and marks>=70 or gender='female' and marks>=50 and city='Hyderabad' or gender='male' and city='Pune';
++------+----------------------+-------+-----------+----------+--------+
+| sno  | sname                | marks | city      | mobile   | gender |
++------+----------------------+-------+-----------+----------+--------+
+|    1 | GUNJA SRIKANTH       |    90 | Hyderabad | 90023223 | male   |
+|    6 | BEJAGAM CHETHAN TEJA |    54 | Pune      | 90023223 | male   |
+|    7 | C PRADEEP            |    95 | Hyderabad | 90023223 | male   |
+|    9 | MANDLA NIKHITHA      |    82 | Hyderabad | 90023223 | female |
+|   10 | BATTULA RAM GOPAL    |    90 | Hyderabad | 90023223 | male   |
+|   11 | BHUKYA SRIDHAR       |    77 | Pune      | 90023223 | male   |
+|   12 | SHIVA KUMAR          |    75 | Pune      | 90023223 | male   |
++------+----------------------+-------+-----------+----------+--------+
+7 rows in set (0.00 sec)
+
+5. Display students details whose score between 50 and 80 and city should be Hyderabad or bglr
+
+select * from student where marks>= 50 and  marks<=80 and city in ('Hyderabad','bglr');
++------+-------------------+-------+------+----------+--------+
+| sno  | sname             | marks | city | mobile   | gender |
++------+-------------------+-------+------+----------+--------+
+|    4 | LAVOORI VARSHITHA |    78 | bglr | 90023223 | female |
++------+-------------------+-------+------+----------+--------+
+1 row in set (0.00 sec)
+
+6.Display student details whose name starts with S and ends with A
+
+select * from student where sname like "S%A";
+Empty set (0.00 sec)
+
+7.Display number of students in each city
+
+select city, count(*) as "No.of Students" from students group by city;
++-----------+----------------+
+| city      | No.of Students |
++-----------+----------------+
+| Banglore  |              3 |
+| Chennai   |              1 |
+| Hyderabad |              4 |
+| kolkata   |              3 |
+| pune      |              1 |
++-----------+----------------+
+5 rows in set (0.00 sec)
+
+8.Best city in education based on score.
+
+select city, avg(marks) as "avg score" from students group by city order by "avg score" desc limit 1;
++-----------+-----------+
+| city      | avg score |
++-----------+-----------+
+| Hyderabad |     71.25 |
++-----------+-----------+
+1 row in set (0.00 sec)
+
+9.Top score in each city
+
+select city,max(marks) as top_score from student group by city order by max(marks) desc;
++-----------+-----------+
+| city      | top_score |
++-----------+-----------+
+| Hyderabad |        95 |
+| bglr      |        87 |
+| Pune      |        77 |
++-----------+-----------+
+3 rows in set (0.00 sec)
+
+10. Display toper details in Hyderabad.
+
+select * from student where city='Hyderabad' order by marks desc limit 1;
++------+-----------+-------+-----------+----------+--------+
+| sno  | sname     | marks | city      | mobile   | gender |
++------+-----------+-------+-----------+----------+--------+
+|    7 | C PRADEEP |    95 | Hyderabad | 90023223 | male   |
++------+-----------+-------+-----------+----------+--------+
+1 row in set (0.00 sec)
