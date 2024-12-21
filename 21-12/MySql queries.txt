@@ -1,0 +1,398 @@
+mysql> select * from salespeople; 
+
++------+---------+-----------+------+ 
+
+| snum | sname   | city      | comm | 
+
++------+---------+-----------+------+ 
+
+| 1001 | Peel    | London    | 0.12 | 
+
+| 1002 | Serres  | San Jose  | 0.13 | 
+
+| 1003 | AxelRod | New York  | 0.10 | 
+
+| 1004 | Motika  | London    | 0.11 | 
+
+| 1005 | Fran    | London    | 0.26 | 
+
+| 1007 | Rifkin  | Barcelona | 0.15 | 
+
++------+---------+-----------+------+ 
+
+6 rows in set (0.00 sec) 
+
+  
+
+mysql> select * from customer; 
+
++------+----------+----------+--------+------+ 
+
+| cnum | cname    | city     | rating | snum | 
+
++------+----------+----------+--------+------+ 
+
+| 2001 | Hoffman  | London   |    100 | 1001 | 
+
+| 2002 | Giovanni | Rome     |    200 | 1003 | 
+
+| 2003 | Liu      | San Jose |    200 | 1002 | 
+
+| 2004 | Grass    | Berlin   |    300 | 1002 | 
+
+| 2006 | Clemens  | London   |    100 | 1001 | 
+
+| 2007 | Pereira  | Rome     |    100 | 1004 | 
+
+| 2008 | Cisneros | San Jose |    300 | 1007 | 
+
++------+----------+----------+--------+------+ 
+
+7 rows in set (0.00 sec) 
+
+ mysql> select *from orders; 
+
++------+---------+------------+------+ 
+
+| onum | amt     | odate      | cnum | 
+
++------+---------+------------+------+ 
+
+| 3001 |   18.69 | 1996-03-10 | 2008 | 
+
+| 3002 | 1900.10 | 1996-10-03 | 2007 | 
+
+| 3003 |  767.19 | 1996-10-03 | 2001 | 
+
+| 3005 | 5160.45 | 1996-10-03 | 2003 | 
+
+| 3006 | 1098.16 | 1996-10-03 | 2008 | 
+
+| 3007 |   75.75 | 1996-10-04 | 2002 | 
+
+| 3008 | 4723.00 | 1996-10-05 | 2006 | 
+
+| 3009 | 1713.23 | 1996-10-04 | 2002 | 
+
+| 3010 | 1309.95 | 1996-10-06 | 2004 | 
+
+| 3011 | 9891.88 | 1996-10-06 | 2006 | 
+
++------+---------+------------+------+ 
+
+10 rows in set (0.00 sec) 
+
+ 
+
+1. Identify which salesperson has generated the highest total sales. 
+
+SELECT s.sname, max(o.amt) AS total_sales 
+
+    -> FROM salespeople s 
+
+    -> JOIN customer c ON s.snum = c.snum 
+
+    -> JOIN orders o ON c.cnum = o.cnum 
+
+    -> GROUP BY s.snum, s.sname 
+
+    -> ORDER BY total_sales DESC 
+
+    -> LIMIT 1; 
+
+ 
+
+2. Count how many customers are handled by each salesperson. 
+
+ select s.sname, count(c.cnum) as No_of_customer from salespeople s join customer c on s.snum=c.snum group by s.snum, s.sname; 
+
++---------+----------------+ 
+
+| sname   | No_of_customer | 
+
++---------+----------------+ 
+
+| Peel    |              2 | 
+
+| Serres  |              2 | 
+
+| AxelRod |              1 | 
+
+| Motika  |              1 | 
+
+| Rifkin  |              1 | 
+
++---------+----------------+ 
+
+ 
+
+ 
+
+3. Find out which customers have placed the most orders. 
+
+SELECT c.cname, c.cnum, COUNT(o.onum) AS num_orders 
+
+    -> FROM customer c 
+
+    -> JOIN orders o ON c.cnum = o.cnum 
+
+    -> GROUP BY c.cnum, c.cname 
+
+    -> HAVING num_orders = ( 
+
+    ->     SELECT MAX(order_count) 
+
+    ->     FROM ( 
+
+    ->         SELECT COUNT(o.onum) AS order_count 
+
+    ->         FROM customer c 
+
+    ->         JOIN orders o ON c.cnum = o.cnum 
+
+    ->         GROUP BY c.cnum 
+
+    ->     ) AS order_counts 
+
+    -> ); 
+
++----------+------+------------+ 
+
+| cname    | cnum | num_orders | 
+
++----------+------+------------+ 
+
+| Giovanni | 2002 |          2 | 
+
+| Clemens  | 2006 |          2 | 
+
+| Cisneros | 2008 |          2 | 
+
++----------+------+------------+ 
+
+ 
+
+ 
+
+ 4. Analyze the average size of orders for each salesperson's customers. 
+
+ 
+
+select s.sname, c.cname, avg(o.amt) as Avg_order_size from salespeople s 
+
+    -> join customer c on s.snum=c.snum 
+
+    -> join orders o on c.cnum=o.cnum 
+
+    -> group by s.sname,s.snum; 
+
++---------+----------+----------------+ 
+
+| sname   | cname    | Avg_order_size | 
+
++---------+----------+----------------+ 
+
+| AxelRod | Giovanni |     894.490000 | 
+
+| Motika  | Pereira  |    1900.100000 | 
+
+| Peel    | Hoffman  |    5127.356667 | 
+
+| Rifkin  | Cisneros |     558.425000 | 
+
+| Serres  | Liu      |    3235.200000 | 
+
++---------+----------+----------------+ 
+
+ 
+
+5. Identify the customers who have spent the most money on orders. 
+ 
+
+select c.cname, c.cnum, sum(o.amt) as spent from customer c join orders o on c.cnum=o.cnum group by c.cnum,c.cname order by spent desc limit 1; 
+
++---------+------+----------+ 
+
+| cname   | cnum | spent    | 
+
++---------+------+----------+ 
+
+| Clemens | 2006 | 14614.88 | 
+
++---------+------+----------+ 
+ 
+
+
+
+6. Analyze which cities (regions) generate the highest total sales. 
+
+SELECT c.city, sum(o.amt) as sales from customer c join orders o on c.cnum=o.cnum group by c.city order by sales; 
+
++----------+----------+ 
+
+| city     | sales    | 
+
++----------+----------+ 
+
+| Berlin   |  1309.95 | 
+
+| Rome     |  3689.08 | 
+
+| San Jose |  6277.30 | 
+
+| London   | 15382.07 | 
+
++----------+----------+ 
+
+ 
+
+
+
+7. Find out which salesperson has the highest average customer rating. 
+
+ 
+
+select s.sname, avg(c.rating) as avg_rating from salespeople s join customer c on s.snum=c.snum group by s.snum, s.sname order by avg_rating desc limit 1; 
+
++--------+------------+ 
+
+| sname  | avg_rating | 
+
++--------+------------+ 
+
+| Rifkin |   300.0000 | 
+
++--------+------------+ 
+
+ 
+
+ 
+
+ 
+
+8. Calculate the percentage of customers who have placed orders for each salesperson. 
+
+ 
+
+SELECT s.sname, 
+
+    ->        (COUNT(DISTINCT CASE WHEN o.onum IS NOT NULL THEN c.cnum END) / COUNT(DISTINCT c.cnum)) * 100 AS percentage_with_orders 
+
+    -> FROM salespeople s 
+
+    -> JOIN customer c ON s.snum = c.snum 
+
+    -> LEFT JOIN orders o ON c.cnum = o.cnum 
+
+    -> GROUP BY s.snum, s.sname; 
+
++---------+------------------------+ 
+
+| sname   | percentage_with_orders | 
+
++---------+------------------------+ 
+
+| Peel    |               100.0000 | 
+
+| Serres  |               100.0000 | 
+
+| AxelRod |               100.0000 | 
+
+| Motika  |               100.0000 | 
+
+| Rifkin  |               100.0000 | 
+
++---------+------------------------+ 
+
+ 
+
+ 
+
+9. Calculate the total revenue generated by each customer. 
+
+  
+
+SELECT c.cname, c.cnum, SUM(o.amt) AS total_revenue 
+
+    -> FROM customer c 
+
+    -> JOIN orders o ON c.cnum = o.cnum 
+
+    -> GROUP BY c.cnum, c.cname; 
+
++----------+------+---------------+ 
+
+| cname    | cnum | total_revenue | 
+
++----------+------+---------------+ 
+
+| Hoffman  | 2001 |        767.19 | 
+
+| Giovanni | 2002 |       1788.98 | 
+
+| Liu      | 2003 |       5160.45 | 
+
+| Grass    | 2004 |       1309.95 | 
+
+| Clemens  | 2006 |      14614.88 | 
+
+| Pereira  | 2007 |       1900.10 | 
+
+| Cisneros | 2008 |       1116.85 | 
+
++----------+------+---------------+ 
+
+ 
+
+
+
+10. Identify customers who have not placed any orders. 
+
+ 
+
+SELECT c.cname, c.cnum 
+
+    -> FROM customer c 
+
+    -> LEFT JOIN orders o ON c.cnum = o.cnum 
+
+    -> WHERE o.onum IS NULL; 
+
+Empty set (0.00 sec) 
+
+ 
+
+ 
+
+11. Show the percentage of total revenue generated by each salesperson. 
+ 
+
+SELECT s.sname, 
+
+    ->        (SUM(o.amt) / (SELECT SUM(amt) FROM orders)) * 100 AS percentage_of_total_revenue 
+
+    -> FROM salespeople s 
+
+    -> JOIN customer c ON s.snum = c.snum 
+
+    -> JOIN orders o ON c.cnum = o.cnum 
+
+    -> GROUP BY s.snum, s.sname; 
+
++---------+-----------------------------+ 
+
+| sname   | percentage_of_total_revenue | 
+
++---------+-----------------------------+ 
+
+| Peel    |                   57.700650 | 
+
+| Serres  |                   24.271524 | 
+
+| AxelRod |                    6.710755 | 
+
+| Motika  |                    7.127585 | 
+
+| Rifkin  |                    4.189486 | 
+
++---------+-----------------------------+ 
