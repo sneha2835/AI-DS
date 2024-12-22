@@ -1,0 +1,54 @@
+The analysis using the given dataset
+
+1. Work-Life Balance
+Objective: Assess any disparities in income and working conditions based on age or employment status.
+
+Steps:
+Calculate the correlation between Age and Income to see if older individuals have better earnings.
+Segment data based on "Employment_Status" to see if individuals not in the universe of workers (e.g., homemakers, retired) are underrepresented or earn less.
+
+2. Income vs. Qualification
+Objective: Determine if higher qualifications lead to better income.
+
+Steps:
+Group data by "Education_Level" and calculate the mean income for each category.
+Visualize the relationship to identify any trends.
+
+3. Gender-Based Discrimination
+Objective: Detect income disparities between males and females.
+
+Steps:
+Group data by "Gender" and calculate average income.
+Perform a statistical tests to determine if differences are significant.
+Examine if females in similar education levels or marital statuses earn less than males.
+
+4. Citizenship-Based Discrimination
+Objective: Check for disparities in income between native-born and foreign-born individuals.
+
+Steps:
+Group data by "Citizenship_Status" and calculate mean income.
+Highlight gaps in income and compare the representation of foreign-born vs. native-born in higher-paying categories.
+
+5. Marital Status Discrimination
+Objective: Analyze if married women face disadvantages in income.
+
+Steps:
+Group data by "Marital_Status" and "Gender" and calculate average income.
+Identify if married women earn less compared to unmarried women and married men.
+Examine if married women are overrepresented in lower-income categories.
+
+
+Actionable Insights & Prevention Measures
+
+After identifying disparities:
+
+Equal Pay Audits: Governments should mandate equal pay audits for organizations, ensuring transparency in salaries for men and women across roles.
+
+Anti-Discrimination Policies: Enforce laws against wage discrimination based on gender, marital status, or citizenship.
+
+Support for Women: Introduce incentives for organizations that promote women in leadership and pay equity.
+
+Inclusive Employment Policies: Provide training to ensure fair treatment for foreign-born employees.
+
+Monitoring Mechanisms: Set up watchdog bodies to investigate salary discrimination cases.
+
