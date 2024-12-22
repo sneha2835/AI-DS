@@ -1,0 +1,5 @@
+n=float(input("Enter the distance in feet: "))
+print("Distance in feet:",n)
+print("Distance in inches:", n*12)
+print("Distance in yards :", n/3)
+print("Distance in miles :",n/5280)
