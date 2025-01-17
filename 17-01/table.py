@@ -14,3 +14,5 @@ sql = "create table classes (branch varchar(20) primary key, section varchar(20)
 mycursor.execute(sql)
 
 mydb.commit()
+mycursor.close()
+mydb.close()
