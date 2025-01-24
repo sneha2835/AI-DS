@@ -1,0 +1,39 @@
+Table Name: Employee
+
+Columns:    Employee_id, Employee_name, salary, Department_name, emp_address,  joiningdate
+
+-------------------------------------------------------------------------------------------------------------------------------------
+1.Write a  query to insert 10 records in to the Employee table.
+------------------------------------------------------------------  
+INSERT INTO Employee (Employee_id, Employee_name, salary, Department_name, emp_address, joiningdate)
+VALUES
+(101, 'Amit Sharma', 50000, 'Finance', 'Bangalore', '2020-06-15'),
+(102, 'Sita Gupta', 45000, 'HR', 'Mumbai', '2019-09-01'),
+(103, 'Rajesh Kumar', 55000, 'IT', 'Hyderabad', '2018-03-10'),
+(104, 'Priya Singh', 40000, 'Sales', 'Delhi', '2021-01-20'),
+(105, 'Vikram Reddy', 60000, 'Marketing', 'Chennai', '2020-08-25'),
+(106, 'Anita Desai', 47000, 'HR', 'Pune', '2017-12-30'),
+(107, 'Suraj Verma', 45000, 'Finance', 'Kolkata', '2022-07-14'),
+(108, 'Neha Rao', 52000, 'IT', 'Mumbai', '2019-11-19'),
+(121, 'Kavita Mehta', 49000, 'IT', 'Delhi', '2022-06-01'),
+(123, 'Anuja Patel', 56000, 'Marketing', 'Jaipur', '2021-03-22');
+
+--------------------------------------------------------------------------------------------------------------------------------------
+2.Write a  query to update emp_address to hyderabad ,joiningdate to 12-02-2022 in Employee table where employee_id=123.
+-------------------------------------------------------------------------------------------------
+UPDATE Employee set emp_address= 'Hyderabad', joiningdate = '2022-02-12' WHERE Employee_id = 123;
+
+--------------------------------------------------------------------------------------------------------------------------------------
+3.Write a query to get the employee information from Employee table whose emp_id is 101
+------------------------------------------------------------------------
+SELECT * FROM Employee WHERE Employee_id = 101;
+
+--------------------------------------------------------------------------------------------------------------------------------------
+4.Write the query to select all the employees whose name ends with ‘a’
+-------------------------------------------------------------------------
+SELECT Employee_name from Employee where Employee_name LIKE '%a';
+
+--------------------------------------------------------------------------------------------------------------------------------------
+5.Write a query to update employee deptname as ‘IT’ of Employee table where emp_id is 121
+--------------------------------------------------------------------------
+UPDATE Employee set Department_name = 'IT' WHERE Employee_id=121;

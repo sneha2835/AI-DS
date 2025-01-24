@@ -1,0 +1,93 @@
+1.Write a SQL query to create a table called Employee that contains five columns as emp_id,emp_name,emp_dept,emp_phoneno,emp_addressand apply not null constraint on emp_phoneno, emp_dept and primary key constraint on emp_id columns.
+
+
+CREATE TABLE Employee (
+    emp_id NUMBER PRIMARY KEY,              
+    emp_name VARCHAR2(30),        
+    emp_dept VARCHAR2(30) NOT NULL,        
+    emp_phoneno VARCHAR2(15) NOT NULL,    
+    emp_address VARCHAR2(30)      
+);
+-------------------------------------------------------------------------------------------------------------------
+
+2.Write a SQL query to create a table called Salespeople that contains four columns as sid,sname,city,mobile and apply primary key constraint on sid and unique constraint on mobile number columns.
+
+
+CREATE TABLE Salespeople (
+     sid NUMBER PRIMARY KEY,
+     sname VARCHAR2(30),
+     city VARCHAR2(20),
+     mobile VARCHAR2(10) UNIQUE
+);
+
+-------------------------------------------------------------------------------------------------------------------
+
+3. Write a SQL query to create a table called orders that contains four columns as oid,order_amt,Order_date,customer_id and apply following constraints.
+
+ a. Primary key constraint on oid
+
+ b. Not null constraint on order_date
+
+ c. unique key constraint on customer_id
+
+ d. set default order_amt is 0(zero), if user does not enter order_amt then zero should be inserted.
+
+CREATE TABLE orders (
+   oid NUMBER PRIMARY KEY,
+   order_amt NUMBER DEFAULT 0,
+   order_date DATE NOT NULL,
+   customer_id NUMBER UNIQUE,
+);
+-------------------------------------------------------------------------------------------------------------------
+
+
+4. Write a SQL queries to create two tables called Salespeople and customer with following columns
+
+   Salespeople:
+
+     Snum,Sname,city and mobile
+
+   Customer:
+
+     cid,cname, city, rating and Snum
+
+   a. make Snum as foreign key in customer table.
+
+
+-- Create Salespeople table
+CREATE TABLE Salespeople (
+    Snum NUMBER PRIMARY KEY,          
+    Sname VARCHAR2(30),                
+    city VARCHAR2(30),                
+    mobile VARCHAR2(15)                
+);
+
+-- Create Customer table
+CREATE TABLE Customer (
+    cid NUMBER PRIMARY KEY,            
+    cname VARCHAR2(30),                
+    city VARCHAR2(30),                
+    rating NUMBER,                    
+    Snum NUMBER,                      
+    CONSTRAINT fk_salesperson          
+        FOREIGN KEY (Snum) REFERENCES Salespeople(Snum)
+);
+
+-------------------------------------------------------------------------------------------------------------------
+
+5. Write a SQL query to create a table called Students with five columns like
+
+    Sid, sname, city, marks, mobile
+
+    a. Apply primary key constraint on Sid
+
+    b. marks coloumn should allow more than 60 score, add constraint for marks column
+
+CREATE TABLE Students (
+    Sid NUMBER PRIMARY KEY,            
+    sname VARCHAR2(30),                
+    city VARCHAR2(30),                
+    marks NUMBER,                      
+    mobile VARCHAR2(15),              
+    CONSTRAINT chk_marks CHECK (marks > 60)  
+);
