@@ -1,0 +1,32 @@
+1.Write a SQL query to create a table called Employee that contains five columns as emp_id,emp_name,emp_dept,emp_phoneno,emp_address.
+
+CREATE TABLE Employee (
+    emp_id NUMBER,              
+    emp_name VARCHAR2(30),        
+    emp_dept VARCHAR2(30),        
+    emp_phoneno VARCHAR2(15),    
+    emp_address VARCHAR2(30)      
+);
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+2.Write a SQL  query to add the new column as joining_date in Employee table.
+
+ALTER TABLE Employee
+ADD joining_date NUMBER;
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+3.Write a SQL query to change the datatype of a emp_phoneno in Employee table.
+
+ALTER TABLE Employee
+MODIFY emp_phoneno VARCHAR2(20);
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+4.Write a SQL query to delete the data inside the Employee table,but not table itself.
+
+DELETE FROM Employee;
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+5.Write a SQL query to drop a emp_phoneno from employee table.
+
+ALTER TABLE Employee
+DROP COLUMN emp_phoneno;
