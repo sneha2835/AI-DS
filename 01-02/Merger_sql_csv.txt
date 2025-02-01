@@ -1,0 +1,46 @@
+import pandas as pd
+from sqlalchemy import create_engine
+
+username = 'root'
+password = 'system'
+host = 'localhost'
+database = 'pythoncoe'
+
+connection_string = f'mysql+mysqlconnector://{username}:{password}@{host}/{database}'
+
+engine=create_engine(connection_string)
+mysql_df = pd.read_sql("SELECT * FROM student", con=engine)
+csv_df = pd.read_csv(r'C:\Users\CVR\Downloads\students.csv')
+merged_df = pd.merge(mysql_df, csv_df, on='sname', how='outer')
+print(merged_df)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ sno       sname  marks       city  mobile  gender   department  occupation
+0    NaN       Alice    NaN        NaN     NaN     NaN           HR     Manager
+1    NaN         Bob    NaN        NaN     NaN     NaN  Engineering   Developer
+2    NaN     Charlie    NaN        NaN     NaN     NaN    Marketing     Analyst
+3    NaN       David    NaN        NaN     NaN     NaN      Finance  Accountant
+4    2.0   aakanksha    9.2    chennai  9023.0  female          NaN         NaN
+5    1.0    akshitha    8.3  hyderabad  9182.0  female          NaN         NaN
+6    9.0       anmol    7.6  bengaluru  8343.0    male          NaN         NaN
+7    6.0       arjun    8.4    kolkata  9550.0    male          NaN         NaN
+8    4.0  haarshitha    9.4  hyderabad  9505.0  female          NaN         NaN
+9   10.0      ishaan    8.0  bengaluru  8434.0    male          NaN         NaN
+10   3.0      manasa    9.0  hyderabad  9390.0  female          NaN         NaN
+11   8.0       rohit    9.5  bengaluru  8575.0    male          NaN         NaN
+12  11.0       sahaj    8.8       pune  7585.0    male          NaN         NaN
+13  12.0     shruthi    7.3       pune  6300.0  female          NaN         NaN
+14   5.0      srindi    8.6    kolkata  9440.0  female          NaN         NaN
+15   7.0       surya    9.1    chennai  9565.0    male          NaN         NaN

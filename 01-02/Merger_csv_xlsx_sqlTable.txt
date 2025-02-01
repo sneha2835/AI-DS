@@ -1,0 +1,41 @@
+import pandas as pd
+from sqlalchemy import create_engine
+
+# Database connection details
+username = 'root'
+password = 'system'
+host = 'localhost'
+database = 'pythoncoe'
+
+connection_string = f'mysql+mysqlconnector://{username}:{password}@{host}/{database}'
+engine = create_engine(connection_string)
+csv_df = pd.read_csv(r'C:\Users\CVR\Downloads\students.csv')
+excel_df = pd.read_excel(r'C:\Users\CVR\Downloads\merger.xlsx')
+mysql_df = pd.read_sql("SELECT * FROM student", con=engine)
+merged_df = pd.merge(csv_df, excel_df, on='sname', how='outer')
+merged_df = pd.merge(merged_df, mysql_df, on='sname', how='outer')
+print(merged_df)
+
+
+
+
+
+         sname   department  occupation  ...       city  mobile  gender
+0        Alice           HR     Manager  ...        NaN     NaN     NaN
+1          Bob  Engineering   Developer  ...        NaN     NaN     NaN
+2      Charlie    Marketing     Analyst  ...        NaN     NaN     NaN
+3        David      Finance  Accountant  ...        NaN     NaN     NaN
+4    aakanksha          NaN         NaN  ...    chennai  9023.0  female
+5     akshitha          NaN         NaN  ...  hyderabad  9182.0  female
+6        anmol          NaN         NaN  ...  bengaluru  8343.0    male
+7        arjun          NaN         NaN  ...    kolkata  9550.0    male
+8   haarshitha          NaN         NaN  ...  hyderabad  9505.0  female
+9       ishaan          NaN         NaN  ...  bengaluru  8434.0    male
+10      manasa          NaN         NaN  ...  hyderabad  9390.0  female
+11       rohit          NaN         NaN  ...  bengaluru  8575.0    male
+12       sahaj          NaN         NaN  ...       pune  7585.0    male
+13     shruthi          NaN         NaN  ...       pune  6300.0  female
+14      srindi          NaN         NaN  ...    kolkata  9440.0  female
+15       surya          NaN         NaN  ...    chennai  9565.0    male
+
+[16 rows x 11 columns]
