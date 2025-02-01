@@ -1,0 +1,93 @@
+import pandas as pd
+import numpy as np
+from sqlalchemy import create_engine
+
+username = 'root'
+password = 'system'
+host = 'localhost'
+database = 'pythoncoe'
+connection_string = f'mysql+mysqlconnector://{username}:{password}@{host}/{database}'
+
+engine = create_engine(connection_string)
+mysql_df = pd.read_sql("SELECT * FROM student", con=engine)
+excel_df = pd.read_excel(r'C:\Users\CVR\Downloads\merger.xlsx')
+merged_df = pd.merge(mysql_df, excel_df, on='sname', how='outer')
+print("*******************************************************")
+print(merged_df)
+print("*******************************************************")
+print(merged_df.dtypes)
+print("*******************************************************")
+print(f"Memory usage:{merged_df.memory_usage(deep=True)}")
+
+merged_df['sno'] = merged_df['sno'].astype(np.float32)
+merged_df['marks'] = merged_df['marks'].astype(np.float32)
+merged_df['mobile'] = merged_df['mobile'].astype(np.float32)
+merged_df['phonenumber'] = merged_df['phonenumber'].astype(np.float32)
+print("*******************************************************")
+print(f"Memory usage:{merged_df.memory_usage(deep=True)}")
+print("*******************************************************")
+
+
+
+
+
+
+
+*******************************************************
+     sno       sname  marks       city  ...  gender  fname  mname   phonenumber
+0    NaN       Alice    NaN        NaN  ...     NaN   John  Marie  1.234568e+09
+1    NaN         Bob    NaN        NaN  ...     NaN   Mike   Jane  9.876543e+09
+2    NaN     Charlie    NaN        NaN  ...     NaN  Chris   Anna  5.555556e+09
+3    NaN       David    NaN        NaN  ...     NaN   Paul  Emily  4.444444e+09
+4    2.0   aakanksha    9.2    chennai  ...  female    NaN    NaN           NaN
+5    1.0    akshitha    8.3  hyderabad  ...  female    NaN    NaN           NaN
+6    9.0       anmol    7.6  bengaluru  ...    male    NaN    NaN           NaN
+7    6.0       arjun    8.4    kolkata  ...    male    NaN    NaN           NaN
+8    4.0  haarshitha    9.4  hyderabad  ...  female    NaN    NaN           NaN
+9   10.0      ishaan    8.0  bengaluru  ...    male    NaN    NaN           NaN
+10   3.0      manasa    9.0  hyderabad  ...  female    NaN    NaN           NaN
+11   8.0       rohit    9.5  bengaluru  ...    male    NaN    NaN           NaN
+12  11.0       sahaj    8.8       pune  ...    male    NaN    NaN           NaN
+13  12.0     shruthi    7.3       pune  ...  female    NaN    NaN           NaN
+14   5.0      srindi    8.6    kolkata  ...  female    NaN    NaN           NaN
+15   7.0       surya    9.1    chennai  ...    male    NaN    NaN           NaN
+
+[16 rows x 9 columns]
+*******************************************************
+sno            float64
+sname           object
+marks          float64
+city            object
+mobile         float64
+gender          object
+fname           object
+mname           object
+phonenumber    float64
+dtype: object
+*******************************************************
+Memory usage:Index           128
+sno             128
+sname          1009
+marks           128
+city            902
+mobile          128
+gender          872
+fname           629
+mname           630
+phonenumber     128
+dtype: int64
+*******************************************************
+Memory usage:Index           128
+sno              64
+sname          1009
+marks            64
+city            902
+mobile           64
+gender          872
+fname           629
+mname           630
+phonenumber      64
+dtype: int64
+*******************************************************
+
+Process finished with exit code 0
